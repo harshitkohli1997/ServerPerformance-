@@ -31,7 +31,7 @@ module.exports = app => {
     }
    //if no data is available req mongo server and update cached server
     
-
+//cache block
     const blogs = await Blog.find({ _user: req.user.id });
    console.log('serving from mongo server');
     res.send(blogs);
