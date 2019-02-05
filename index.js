@@ -5,6 +5,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 
+require('./services/cache');
 require('./models/User');
 require('./models/Blog');
 require('./services/passport');
