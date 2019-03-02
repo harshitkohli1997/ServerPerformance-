@@ -20,17 +20,18 @@ mongoose.Query.prototype.exec =  async function() {
    );
 
    const cacheValue = await client.get(key);
-
+// if we have value for key in redis return that
    if(cacheValue){
        console.log(cacheValue);
        const doc = JSON.parse(cacheValue);
-                
+           //if doc is array then parse each in array into model     
     return  Array.isArray(doc)
     ? doc.map(d => new this.model(d)) 
     :new this.model(doc);
        
     }
     // console.log(key);
+    //else store val in redis
     const result = await exec.apply(this,arguments);
     client.set(key,JSON.stringify(result));
     return result;
